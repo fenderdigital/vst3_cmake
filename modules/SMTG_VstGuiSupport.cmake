@@ -86,7 +86,11 @@ function(smtg_enable_vstgui_support)
         ${vstgui_source_dir}/vstgui/plugin-bindings/vst3padcontroller.h
         ${vstgui_source_dir}/vstgui/plugin-bindings/vst3editor.cpp
         ${vstgui_source_dir}/vstgui/plugin-bindings/vst3editor.h
-
+		
+		${vstgui_source_dir}/vstgui/plugin-bindings/viewrendering/vst3viewrendereditor.h
+		${vstgui_source_dir}/vstgui/plugin-bindings/viewrendering/vst3viewrendereditor.cpp
+		${vstgui_source_dir}/vstgui/plugin-bindings/viewrendering/psliids.cpp
+		
         ${public_sdk_SOURCE_DIR}/source/vst/vstguieditor.cpp
     )
 
@@ -96,9 +100,12 @@ function(smtg_enable_vstgui_support)
             vstgui_uidescription
     )
 
+    find_path (presonusinterfaces_dir NAMES ipslviewrendering.h HINTS ${SDK_ROOT}/presonus)
+
     target_include_directories(vstgui_support
         PUBLIC
             ${vstgui_source_dir}
+			${presonusinterfaces_dir}
     )
     
     target_compile_definitions(vstgui_support
